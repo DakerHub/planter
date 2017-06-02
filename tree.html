@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="tree.css">
+    <title>Document</title>
+    <style>
+        .tree-wrapper{
+            width: 400px;
+            height: 200px;
+            margin: auto;
+            border: thin solid #ccc;
+        }
+        .result{
+            width: 400px;
+            height: 200px;
+            margin: 10px auto;
+            padding-left: 20px;
+            border: thin solid #ccc;
+            box-sizing: border-box;
+        }
+        .opration{
+            width: 400px;
+            height: 200px;
+            margin: 10px auto;
+            padding-left: 20px;
+            padding-top: 20px;
+            border: thin solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .opration label{
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+        }
+        #addItem,#removeItem{
+            width: 100px;
+            height: 30px;
+            padding: 0;
+            margin: 10px 0;
+            line-height: 30px;
+            text-align: center;
+            background-color: #fff;
+            border: thin solid #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="tree-wrapper">
+    </div>
+    <div class="opration">
+        <label>nodeName:</label>
+        <input type="text" id="item-name"><br>
+        <label>parentName:</label>
+        <input type="text" id="item-parentName"><br>
+        <button id="addItem">Add</button><br>
+        <label for="">nodeName:</label>
+        <input type="text" id="remove-name"><br>
+        <button id="removeItem">remove</button>
+
+    </div>
+    <div class="result"></div>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+    <script src="tree.js"></script>
+    <script>
+        var tree = [{
+            name: "root1",
+            id: "1",
+            children: [{
+                name: "node1_1",
+                id: "3",
+                children: []
+            }]
+        },{
+            name: "root2",
+            id: "2",
+            children: [{
+                name: "node2_1",
+                id: "4",
+                children: [{
+                    name: "node2_1_1",
+                    id: "6",
+                    children: []
+                }]
+            },{
+                name: "node2_2",
+                id: "5",
+                children: []
+            }]
+        }];
+        var hook = $(".tree-wrapper").tree({
+            data: tree,
+            fold: false,
+            foldAllChildren: true,
+            customClass: "active",
+            itemClick: function(data){
+                console.log(data);
+                var str = "<p>点击了："+data.name+"</p>";
+                str += "<p>其id为："+data.id+"</p>";
+                str += "<p>level为："+data.level+"级</p>";
+                var local = [];
+                data.location.forEach(function(value, index, array) {
+                    local.unshift(value.name);
+                });
+                str += "<p>定位："+local.join(">")+"</p>";
+                $(".result").html(str);
+            }
+        });
+        $("#addItem").click(function(){
+            hook.addChild($("#item-name").val(),$("#item-parentName").val(),{});
+        });
+        $("#removeItem").click(function(){
+            hook.removeChild($("#remove-name").val());
+        });
+    </script>
+</body>
+</html>

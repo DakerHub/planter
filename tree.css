@@ -1,0 +1,42 @@
+#jQuery-tree-wrapper{
+    font-size: 14px;
+}
+#jQuery-tree-wrapper li{
+    list-style: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+#jQuery-tree-wrapper ul{
+    padding-left: 20px;
+    clear: both;
+}
+#jQuery-tree-wrapper .tree-node-name{
+    float: left;
+    height: 24px;
+    line-height: 24px;
+}
+#jQuery-tree-wrapper .operation{
+    display: -webkit-flex;
+    display: flex;
+    float: left;
+    align-items: center;
+    height: 24px;
+    justify-content: center;
+}
+#jQuery-tree-wrapper .folder{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url(imgs/arrow_right.png)
+}
+#jQuery-tree-wrapper .folder.open{
+    background: url(imgs/arrow_down.png)
+}
+#jQuery-tree-wrapper .no-folder{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+.tree-active{
+    font-weight: bold;
+}
